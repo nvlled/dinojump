@@ -10,14 +10,11 @@ The relevant files can be found in the dino\_\* directories,
 in particular the [dino_coroutine/dino.go](dino_coroutine/dino.go).
 See the Notes section of the this readme for more details.
 
-Note: this whole project was written
-while figuring how to use the [ebiten game engine](https://ebitengine.org/).
-
 ## How to run
 
-1. `git clone https://blah/todo`
-2. `go run .`
-   or `./dev` to enable auto-reload
+1. setup go compiler and OS dependencies for [ebiten](https://ebitengine.org/en/documents/install.html)
+2. `git clone https://github.com/nvlled/dinojump`
+3. `go run .`
 
 ## Controls
 
@@ -31,7 +28,7 @@ while figuring how to use the [ebiten game engine](https://ebitengine.org/).
 - **flying** - To fly, hold left or right until the dino is running
   really fast, then do a triple jump. To stop flying, hold down key
   then press space key.
-- **jump charge** - Some silly feature, for purposes of using coroutines
+- **jump charge** - Some silly feature, just added to show coroutines
   with more complicated state transitions. To activate:
 
   1. press and hold space and up arrow until dino starts spinning
@@ -84,3 +81,6 @@ while figuring how to use the [ebiten game engine](https://ebitengine.org/).
 
 - With coroutines, I get a scripting functionality
   without needing to embed a scripting engine.
+
+- This whole project was written while exploring and figuring out
+  how to use the [ebiten game engine](https://ebitengine.org/). It's admittedly a bit messy.
