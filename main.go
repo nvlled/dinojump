@@ -19,7 +19,6 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot"
 	"github.com/nvlled/carrot-example/action"
 	"github.com/nvlled/carrot-example/common"
 
@@ -57,7 +56,7 @@ type Game struct {
 
 	renderTileSize int
 
-	UpdateActions action.ActionSet[carrot.Void]
+	UpdateActions action.ActionSet[common.Void]
 	DrawActions   action.ActionSet[*ebiten.Image]
 }
 
@@ -73,22 +72,17 @@ func createLevel(renderTileSize int) *level.T {
 			'|': level.CreateTile(11),
 		},
 	}, `
-|vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv|
-|                                                                         |
-|       **                                                                |
-|      ****                                                               |
-|                   *  *                                                  |
-|                ***  *                                                   |
-|    **        * *      * *                                               |
-|   **                                                                    |
-|     **************************                                          |
-| *                                  ********                             |
-| **  *   *****                      *                                    |
-| *                  *  **                                                |
-| **  * * * *  *******    *                                               |
-| *           *                                                           |
-|                                                                         |
-|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|
+|vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv|
+|      ****                                                      |
+|   **                                                           |
+|     **************************                                 |
+| *                                  ********                    |
+| **  *   *****                      *                           |
+| *                  *  **                                       |
+| **  * * * *  *******    *                                      |
+| *           *                                                  |
+|                                                                |
+|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|
 `)
 }
 
@@ -110,7 +104,7 @@ func NewGame() *Game {
 
 		canvas: ebiten.NewImage(int(worldW), int(worldH)),
 
-		UpdateActions: *action.NewSet[carrot.Void](),
+		UpdateActions: *action.NewSet[common.Void](),
 		DrawActions:   *action.NewSet[*ebiten.Image](),
 
 		level: level,

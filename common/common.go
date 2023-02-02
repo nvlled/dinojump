@@ -9,6 +9,10 @@ import (
 	"github.com/nvlled/carrot"
 )
 
+type Void struct{}
+
+var None = Void{}
+
 func ImageRect(x, y, w, h float64) image.Rectangle {
 	return image.Rect(int(x), int(y), int(x+w), int(y+h))
 }
@@ -33,7 +37,7 @@ func RangeSlice(start, end int) []int {
 	return nums
 }
 
-func AwaitKey(in carrot.Invoker, key ebiten.Key, abortOpt ...*bool) {
+func AwaitKey(ctrl carrot.Control, key ebiten.Key, abortOpt ...*bool) {
 	var abort *bool
 	if len(abortOpt) > 0 {
 		abort = abortOpt[0]
@@ -43,7 +47,7 @@ func AwaitKey(in carrot.Invoker, key ebiten.Key, abortOpt ...*bool) {
 		if inpututil.IsKeyJustPressed(key) {
 			break
 		}
-		in.Yield()
+		ctrl.Yield()
 	}
 }
 

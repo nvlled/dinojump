@@ -8,7 +8,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-	"github.com/nvlled/carrot"
 	"github.com/nvlled/carrot-example/assets"
 	"github.com/nvlled/carrot-example/bitf"
 	"github.com/nvlled/carrot-example/common"
@@ -152,7 +151,7 @@ func (dino *Sprite) SetAnimation(animation DinoAnimation) {
 	}
 }
 
-func (dino *Sprite) RestrictInWorld(carrot.Void) {
+func (dino *Sprite) RestrictInWorld(common.Void) {
 	r := dino.Level.GetRect()
 	cx, _ := dino.RestrictWithin(&r)
 	if cx {
@@ -160,7 +159,7 @@ func (dino *Sprite) RestrictInWorld(carrot.Void) {
 	}
 }
 
-func (dino *Sprite) CollideWithTile(carrot.Void) {
+func (dino *Sprite) CollideWithTile(common.Void) {
 	level := dino.Level
 	colRect := dino.GetCollisionRect()
 	byte, l, r, t, b := level.GetTileIntersections(&colRect)
@@ -180,7 +179,7 @@ func (dino *Sprite) CollideWithTile(carrot.Void) {
 	}
 }
 
-func (dino *Sprite) ApplyGravity(carrot.Void) {
+func (dino *Sprite) ApplyGravity(common.Void) {
 	if dino.Hit.Some(0b0001) {
 		dino.Vel.Y = 0
 	} else {

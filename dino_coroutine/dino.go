@@ -83,57 +83,57 @@ func (dino *Sprite) SetController(coroutine carrot.Coroutine) {
 	dino.controllerScript.Transition(coroutine)
 }
 
-func (dino *Sprite) AnimateOuchie(in *carrot.Invoker) {
+func (dino *Sprite) AnimateOuchie(ctrl *carrot.Control) {
 	frames := seqiter.CreateSeqIterator(14, 16)
 	for {
 		dino.CurrentTileID = frames.Next()
-		in.Delay(3)
+		ctrl.Delay(3)
 	}
 }
 
-func (dino *Sprite) AnimateIdle(in *carrot.Invoker) {
+func (dino *Sprite) AnimateIdle(ctrl *carrot.Control) {
 	frames := seqiter.CreateSeqIterator(0, 1, 2, 3)
 	for {
 		dino.CurrentTileID = frames.Next()
-		in.Delay(7)
+		ctrl.Delay(7)
 	}
 }
 
-func (dino *Sprite) AnimateWalk(in *carrot.Invoker) {
+func (dino *Sprite) AnimateWalk(ctrl *carrot.Control) {
 	frames := seqiter.CreateSeqIterator(3, 4, 5, 6, 7, 8)
 	for {
 		dino.CurrentTileID = frames.Next()
-		in.Delay(10)
+		ctrl.Delay(10)
 	}
 }
 
-func (dino *Sprite) AnimateRun(in *carrot.Invoker) {
+func (dino *Sprite) AnimateRun(ctrl *carrot.Control) {
 	frames := seqiter.CreateSeqIterator(common.RangeSlice(18, 23)...)
 	for {
 		dino.CurrentTileID = frames.Next()
 		if dino.Vel.X >= float64(dinoMaxSpeed) {
-			in.Delay(1)
+			ctrl.Delay(1)
 		} else {
-			in.Delay(3)
+			ctrl.Delay(3)
 		}
 	}
 }
 
-func (dino *Sprite) AnimateFly(in *carrot.Invoker) {
+func (dino *Sprite) AnimateFly(ctrl *carrot.Control) {
 	frames := seqiter.CreateSeqIterator(17, 18)
 	for {
 		dino.CurrentTileID = frames.Next()
-		in.Delay(10)
+		ctrl.Delay(10)
 	}
 }
 
-func (dino *Sprite) AnimatePreview(in *carrot.Invoker) {
+func (dino *Sprite) AnimatePreview(ctrl *carrot.Control) {
 	for {
-		in.Yield()
+		ctrl.Yield()
 	}
 }
 
-func (dino *Sprite) ControlTestPosition(in *carrot.Invoker) {
+func (dino *Sprite) ControlTestPosition(ctrl *carrot.Control) {
 	rect := dino.Level.GetTileRectAt(3, 3)
 	dino.SetTop(rect.Top())
 	dino.SetLeft(rect.Left())
@@ -161,11 +161,11 @@ func (dino *Sprite) ControlTestPosition(in *carrot.Invoker) {
 			dino.controllerScript.Transition(dino.ControllerCoroutine)
 		}
 
-		in.Yield()
+		ctrl.Yield()
 	}
 }
 
-func (dino *Sprite) ControlTestFrame(in *carrot.Invoker) {
+func (dino *Sprite) ControlTestFrame(ctrl *carrot.Control) {
 	dino.Actions.ClearNextApply()
 
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -175,7 +175,7 @@ func (dino *Sprite) ControlTestFrame(in *carrot.Invoker) {
 	ids := common.RangeSlice(0, 23)
 	frames := seqiter.CreateSeqIterator(ids...)
 	for {
-		in.Delay(1)
+		ctrl.Delay(1)
 		if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 			dino.CurrentTileID = frames.Prev()
 		}
@@ -185,7 +185,7 @@ func (dino *Sprite) ControlTestFrame(in *carrot.Invoker) {
 	}
 }
 
-func (dino *Sprite) RestrictInWorld(carrot.Void) {
+func (dino *Sprite) RestrictInWorld(common.Void) {
 	r := dino.Level.GetRect()
 	cx, _ := dino.RestrictWithin(&r)
 	if cx {
@@ -193,7 +193,7 @@ func (dino *Sprite) RestrictInWorld(carrot.Void) {
 	}
 }
 
-func (dino *Sprite) CollideWithTile(carrot.Void) {
+func (dino *Sprite) CollideWithTile(common.Void) {
 	level := dino.Level
 	colRect := dino.GetCollisionRect()
 	byte, l, r, t, b := level.GetTileIntersections(&colRect)
@@ -214,7 +214,7 @@ func (dino *Sprite) CollideWithTile(carrot.Void) {
 	}
 }
 
-func (dino *Sprite) ApplyGravity(carrot.Void) {
+func (dino *Sprite) ApplyGravity(common.Void) {
 	if dino.Hit.Some(0b0001) {
 		dino.Vel.Y = 0
 	} else {
@@ -224,7 +224,7 @@ func (dino *Sprite) ApplyGravity(carrot.Void) {
 	dino.Pos.Y += dino.Vel.Y
 }
 
-func (dino *Sprite) ControllerCoroutine(in *carrot.Invoker) {
+func (dino *Sprite) ControllerCoroutine(ctrl *carrot.Control) {
 	turns := 0
 	jumps := 0
 	maxJumps := 3
@@ -260,7 +260,7 @@ IDLE:
 				goto JUMP
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -299,7 +299,7 @@ WALK:
 				goto RUN
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -333,7 +333,7 @@ BRAKE:
 
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -359,7 +359,7 @@ BOUNCE:
 				goto IDLE
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -404,7 +404,7 @@ RUN:
 				dino.Vel.X += 0.2 * numsign.Get(dino.Vel.X)
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -415,11 +415,11 @@ JUMP:
 		dino.Actions.Remove(dino.ApplyGravity)
 
 		dino.CurrentTileID = 11
-		in.Yield()
+		ctrl.Yield()
 		dino.CurrentTileID = 12
 
 		dino.animationScript.Cancel()
-		in.UntilFunc(dino.animationScript.IsDone)
+		ctrl.YieldUntil(dino.animationScript.IsDone)
 
 		dino.Vel.Y = -7.5
 		jumpCharge = 0
@@ -432,9 +432,11 @@ JUMP:
 				if leftDown {
 					dino.Flip = 0b10
 					numsign.Set(&dino.Vel.X, -1)
+					dino.Pos.X -= 1.0
 				} else if rightDown {
 					dino.Flip = 0b00
 					numsign.Set(&dino.Vel.X, 1)
+					dino.Pos.X += 1.0
 				} else {
 					numsign.Set(&dino.Vel.X, 0)
 				}
@@ -481,7 +483,7 @@ JUMP:
 			}
 
 			turns++
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 
@@ -491,7 +493,7 @@ JUMP_CHARGE:
 		dino.Actions.Remove(dino.ApplyGravity)
 		dino.Actions.Remove(dino.CollideWithTile)
 
-		in.Yield()
+		ctrl.Yield()
 		n := 0.5
 		size := dino.DrawSize
 		pos := dino.Pos
@@ -514,7 +516,7 @@ JUMP_CHARGE:
 			}
 			dino.Rotation += n
 
-			in.Yield()
+			ctrl.Yield()
 		}
 
 		pressed = 0
@@ -537,7 +539,7 @@ JUMP_CHARGE:
 			dino.Pos.X += -0.2 + rand.Float64()*0.3
 			dino.Pos.Y += -0.2 + rand.Float64()*0.3
 
-			in.Yield()
+			ctrl.Yield()
 		}
 
 		for {
@@ -552,7 +554,7 @@ JUMP_CHARGE:
 			} else if dino.Rotation < 0 {
 				dino.Rotation += 0.55
 			}
-			in.Yield()
+			ctrl.Yield()
 		}
 
 		dino.DrawSize = size
@@ -597,10 +599,10 @@ JUMP_CHARGE:
 				goto END
 			}
 
-			in.Yield()
+			ctrl.Yield()
 		}
 
-		in.Yield()
+		ctrl.Yield()
 
 		for {
 			dino.Pos.Add(&dino.Vel)
@@ -608,7 +610,7 @@ JUMP_CHARGE:
 			if dino.Vel.Length() < 5 || inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 				break
 			}
-			in.Yield()
+			ctrl.Yield()
 		}
 
 	END:
@@ -659,7 +661,7 @@ FLY:
 				goto FALL
 			}
 
-			in.Yield()
+			ctrl.Yield()
 
 		}
 	} // ---------------------------------------------------------
@@ -670,7 +672,7 @@ FALL:
 		dino.CurrentTileID = 12
 		dino.animationScript.Cancel()
 		dino.Actions.Add(dino.ApplyGravity)
-		in.Yield()
+		ctrl.Yield()
 
 		for {
 			leftDown := ebiten.IsKeyPressed(ebiten.KeyLeft)
@@ -682,9 +684,11 @@ FALL:
 				if leftDown {
 					dino.Flip = 0b10
 					numsign.Set(&dino.Vel.X, -1)
+					dino.Pos.X -= 1.0
 				} else if rightDown {
 					dino.Flip = 0b00
 					numsign.Set(&dino.Vel.X, 1)
+					dino.Pos.X += 1.0
 				} else {
 					numsign.Set(&dino.Vel.X, 0)
 				}
@@ -696,7 +700,7 @@ FALL:
 			}
 
 			if jumps >= 2 {
-				dino.Rotation += dino.Vel.X * dirX * float64(jumps) / 10
+				dino.Rotation += dirX * float64(jumps) / 10
 			}
 
 			if !dino.Hit.Some(0b1100) {
@@ -717,7 +721,7 @@ FALL:
 					goto WALK
 				}
 			}
-			in.Yield()
+			ctrl.Yield()
 		}
 	} // ---------------------------------------------------------
 

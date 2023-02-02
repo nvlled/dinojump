@@ -7,8 +7,8 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot"
 	"github.com/nvlled/carrot-example/action"
+	"github.com/nvlled/carrot-example/common"
 	"github.com/nvlled/carrot-example/ebitenx"
 	"github.com/nvlled/carrot-example/rect"
 	"github.com/nvlled/carrot-example/vector"
@@ -49,7 +49,7 @@ type T struct {
 
 	tileIDRect image.Rectangle
 
-	Actions *action.ActionSet[carrot.Void]
+	Actions *action.ActionSet[common.Void]
 }
 
 func New(atlas *ebiten.Image, numCols, numRows int /*, animationIndices map[string][]int*/) *T {
@@ -98,7 +98,7 @@ func New(atlas *ebiten.Image, numCols, numRows int /*, animationIndices map[stri
 		cols: numCols,
 		rows: numCols,
 
-		Actions: action.NewSet[carrot.Void](),
+		Actions: action.NewSet[common.Void](),
 	}
 }
 
@@ -154,7 +154,7 @@ func (sprite *T) Update() {
 	sprite.Rect.Min = vector.AddXY(&sprite.Pos, -sprite.DrawSize.X/2, -sprite.DrawSize.Y/2)
 	sprite.Rect.Max = vector.AddXY(&sprite.Pos, sprite.DrawSize.X/2, sprite.DrawSize.Y/2)
 
-	sprite.Actions.Apply(carrot.None)
+	sprite.Actions.Apply(common.None)
 }
 
 func (sprite *T) Draw(canvas *ebiten.Image) {
