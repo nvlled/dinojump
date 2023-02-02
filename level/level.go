@@ -5,10 +5,10 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot-example/assets"
-	"github.com/nvlled/carrot-example/ebitenx"
-	"github.com/nvlled/carrot-example/rect"
-	"github.com/nvlled/carrot-example/sprite"
+	"github.com/nvlled/dinojump/assets"
+	"github.com/nvlled/dinojump/ebitenx"
+	"github.com/nvlled/dinojump/rect"
+	"github.com/nvlled/dinojump/sprite"
 )
 
 type f64 = float64

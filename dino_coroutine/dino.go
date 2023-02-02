@@ -9,13 +9,13 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/nvlled/carrot"
-	"github.com/nvlled/carrot-example/assets"
-	"github.com/nvlled/carrot-example/bitf"
-	"github.com/nvlled/carrot-example/common"
-	"github.com/nvlled/carrot-example/level"
-	"github.com/nvlled/carrot-example/numsign"
-	"github.com/nvlled/carrot-example/seqiter"
-	"github.com/nvlled/carrot-example/sprite"
+	"github.com/nvlled/dinojump/assets"
+	"github.com/nvlled/dinojump/bitf"
+	"github.com/nvlled/dinojump/common"
+	"github.com/nvlled/dinojump/level"
+	"github.com/nvlled/dinojump/numsign"
+	"github.com/nvlled/dinojump/seqiter"
+	"github.com/nvlled/dinojump/sprite"
 )
 
 var dinoMaxSpeed = 20

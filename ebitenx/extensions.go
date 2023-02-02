@@ -5,9 +5,9 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot-example/assets"
-	"github.com/nvlled/carrot-example/rect"
-	"github.com/nvlled/carrot-example/vector"
+	"github.com/nvlled/dinojump/assets"
+	"github.com/nvlled/dinojump/rect"
+	"github.com/nvlled/dinojump/vector"
 )
 
 func DrawRectT(canvas *ebiten.Image, r rect.T, color color.Color) {

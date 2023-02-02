@@ -7,11 +7,11 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot-example/action"
-	"github.com/nvlled/carrot-example/common"
-	"github.com/nvlled/carrot-example/ebitenx"
-	"github.com/nvlled/carrot-example/rect"
-	"github.com/nvlled/carrot-example/vector"
+	"github.com/nvlled/dinojump/action"
+	"github.com/nvlled/dinojump/common"
+	"github.com/nvlled/dinojump/ebitenx"
+	"github.com/nvlled/dinojump/rect"
+	"github.com/nvlled/dinojump/vector"
 )
 
 var Debug = false

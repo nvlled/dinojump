@@ -3,9 +3,9 @@ package main
 import (
 	// ---------------------------------------------------------
 	// Uncomment only one of the following:
-	dino "github.com/nvlled/carrot-example/dino_coroutine"
-	//dino "github.com/nvlled/carrot-example/dino_enums"
-	//dino "github.com/nvlled/carrot-example/dino_func"
+	dino "github.com/nvlled/dinojump/dino_coroutine"
+	//dino "github.com/nvlled/dinojump/dino_enums"
+	//dino "github.com/nvlled/dinojump/dino_func"
 	// ---------------------------------------------------------
 
 	"image/color"
@@ -19,13 +19,13 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/nvlled/carrot-example/action"
-	"github.com/nvlled/carrot-example/common"
+	"github.com/nvlled/dinojump/action"
+	"github.com/nvlled/dinojump/common"
 
-	"github.com/nvlled/carrot-example/level"
-	"github.com/nvlled/carrot-example/rect"
-	"github.com/nvlled/carrot-example/scrdbg"
-	"github.com/nvlled/carrot-example/vector"
+	"github.com/nvlled/dinojump/level"
+	"github.com/nvlled/dinojump/rect"
+	"github.com/nvlled/dinojump/scrdbg"
+	"github.com/nvlled/dinojump/vector"
 
 	_ "image/jpeg"
 )

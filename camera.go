@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/nvlled/carrot-example/common"
-	"github.com/nvlled/carrot-example/rect"
-	"github.com/nvlled/carrot-example/vector"
+	"github.com/nvlled/dinojump/common"
+	"github.com/nvlled/dinojump/rect"
+	"github.com/nvlled/dinojump/vector"
 )
 
 type Camera struct {

@@ -1,4 +1,4 @@
-module github.com/nvlled/carrot-example
+module github.com/nvlled/dinojump
 
 go 1.19
 

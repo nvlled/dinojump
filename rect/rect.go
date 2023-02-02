@@ -6,7 +6,7 @@ import (
 	"image"
 	"math"
 
-	"github.com/nvlled/carrot-example/vector"
+	"github.com/nvlled/dinojump/vector"
 )
 
 // T is a coordinate system aligned rectangle defined by a Min and Max vector.
